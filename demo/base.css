@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgb(98, 97, 97);
+}
+
+a {
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+ul {
+  display: grid;
+  gap: 24px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+/* フキダシに関するスタイル。各デモの紹介内容と重複するため、base.cssにまとめています。*/
+.tooltip {
+  min-width: 13rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid #111111;
+  border-radius: 1rem;
+  background: #fffdf9;
+  pointer-events: none;
+
+  /* そのままだとフキダシの左端がアイコンの中央に揃ってしまうので、フキダシを自分の幅の半分だけ左にずらす */
+  translate: -50% 0;
+}
+
+/* ▼ （枠＋中身の二重三角） */
+.tooltip::before,
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -100%);
+}
+
+/* 外側：枠の三角 */
+.tooltip::before {
+  top: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #111111; /* 枠と同じ色 */
+  border-left: 10px solid transparent;
+}
+
+/* 内側：中身の三角（背景色） */
+.tooltip::after {
+  top: 2px;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #fffdf9; /* 背景色 */
+  border-left: 9px solid transparent;
+}
+
