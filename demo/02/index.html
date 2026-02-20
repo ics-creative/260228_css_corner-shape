@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>2. 応用：デモ - corner-shape</title>
+  <link href="../base.css" rel="stylesheet" />
+  <style>
+    :root {
+      --radius: 20px;
+      --shape: round;
+    }
+
+    .wrapper {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .gallery {
+      display: grid;
+      place-items: center;
+      gap: 100px;
+    }
+
+    .item {
+      display: grid;
+      place-items: center;
+      width: 100px;
+      height: 100px;
+      font-size: 24px;
+      color: #7c71f6;
+      border-radius: var(--radius);
+      background: #ebe9fc;
+
+      @supports (corner-shape: bevel) {
+        &.item01 {
+          /* 左上、右上、右下、左下 */
+          corner-shape: scoop round round round;
+          border-radius: 50%;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 90%;
+            height: 90%;
+            background: #b7aff9;
+            border-radius: 50%;
+          }
+        }
+
+        &.item02 {
+          corner-shape: scoop;
+          border-radius: 50%;
+          height: 120px;
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60%;
+            height: 60%;
+            background: #b7aff9;
+            corner-shape: scoop;
+            border-radius: 50%;
+          }
+        }
+
+        &.item03 {
+          corner-shape: scoop;
+          border-radius: 16px;
+          width: 230px;
+          border: 8px solid #7c71f6;
+        }
+
+        &.item04 {
+          corner-shape: notch square;
+          border-radius: 20px;
+          width: 200px;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background: #7c71f6;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: calc(100% - 16px);
+            left: calc(100% - 16px);
+            width: 16px;
+            height: 16px;
+            background: #b9b3ff;
+          }
+        }
+
+        &.item05 {
+          position: relative;
+          height: 140px;
+          border-radius: 10px;
+          corner-shape: bevel;
+          border: 16px solid;
+          border-color: #b7aff9 #5e53e8 #2e2a86 #9b92f4;
+
+          &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            corner-shape: bevel;
+            border: 10px solid;
+            border-color: #dcd8fb #7c71f6 #3d39a7 #c2bcf8;
+            background: linear-gradient(0deg, #7c71f6, #ebe9fc);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 85%;
+            height: 90%;
+            border-radius: 4px;
+            corner-shape: bevel;
+            border: 10px solid;
+            border-color: #b7aff9 #5e53e8 #2e2a86 #9b92f4;
+            background: transparent;
+          }
+        }
+
+        &.item06 {
+          position: relative;
+          corner-shape: bevel round round bevel;
+          border-radius: 24px 4px 4px 24px;
+          width: 200px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            translate: -50% -50%;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #737373;
+          }
+        }
+
+        &.item07 {
+          width: 200px;
+          height: 100px;
+          border: 3px solid #b7aff9;
+          corner-shape: squircle round;
+          border-radius: 50%;
+          position: relative;
+          background: transparent;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 85%;
+            left: 40%;
+            width: 0;
+            height: 30px;
+            border: 1.5px solid #b7aff9;
+            corner-shape: squircle round;
+            border-radius: 40%;
+            rotate: 45deg;
+          }
+        }
+
+        &.item08 {
+          display: grid;
+          width: 250px;
+          border-radius: 20px;
+          position: relative;
+          z-index: 1;
+          corner-shape: bevel square;
+
+          & .text {
+            display: grid;
+            place-items: center;
+          }
+
+          & .marker {
+            width: 110%;
+            height: 0.8rem;
+            border-radius: 25%;
+            corner-shape: squircle round;
+            background: #b7aff9;
+            transform: rotate(-1.2deg);
+            margin-top: -0.75rem;
+            mix-blend-mode: multiply; /* 乗算 */
+          }
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="gallery">
+    <div class="item item01"></div>
+    <div class="item item02"></div>
+    <div class="item item03">ticket</div>
+    <div class="item item04"></div>
+    <div class="item item05"></div>
+    <div class="item item06">label</div>
+    <div class="item item07"></div>
+    <div class="item item08">
+      <span class="text">
+        corner-shape!
+        <span class="marker"></span>
+      </span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
