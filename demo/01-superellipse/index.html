@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>1. 基本：値の紹介（superellipse） - corner-shape</title>
+  <link href="../base.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --radius: 20px;
+      --super: 1.1;
+    }
+
+    .wrapper {
+      display: grid;
+      gap: 60px;
+      color: #f8f8f8;
+    }
+
+    .control {
+      display: grid;
+      gap: 20px;
+    }
+
+    .radius-control, .super-control {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .radius-control input, .super-control input {
+      width: 200px;
+    }
+
+    .gallery {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+
+      & > div {
+        display: grid;
+        grid-template-columns: 100px 250px;
+        gap: 20px;
+      }
+    }
+
+    .item {
+      display: grid;
+      place-items: center;
+      height: 100px;
+      color: #3223b3;
+      border: 1px solid #ebe9fc;
+      border-radius: var(--radius);
+      background: #ebe9fc;
+
+      &.second-item {
+        color: #f8f8f8;
+        background: #3223b3;
+        box-shadow: 6px 6px 0 #ebe9fc;
+      }
+    }
+
+    .superellipse .item {
+      corner-shape: superellipse(var(--super));
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="control">
+    <!-- radiusスライダー -->
+    <div class="radius-control">
+      <label for="radius">border-radius:</label>
+      <input id="radius" max="50" min="0" type="range" value="20"/>
+      <span id="radiusValue">20px</span>
+    </div>
+    <!-- superellipse スライダー -->
+    <div class="super-control">
+      <label for="super">superellipse:</label>
+      <input id="super" max="5" min="0" step="0.1" type="range" value="1.1"/>
+      <span id="superValue">1.1</span>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="superellipse">
+      <div class="item">superellipse</div>
+      <div class="item second-item">superellipse</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.documentElement;
+  const radiusSlider = document.getElementById("radius");
+  const radiusValue = document.getElementById("radiusValue");
+  const superSlider = document.getElementById("super");
+  const superValue = document.getElementById("superValue");
+
+  // radius変更
+  radiusSlider.addEventListener("input", () => {
+    const value = radiusSlider.value;
+    root.style.setProperty("--radius", value + "px");
+    radiusValue.textContent = value + "px";
+  });
+
+  // super変更
+  superSlider.addEventListener("input", () => {
+    const value = superSlider.value;
+    root.style.setProperty("--super", value);
+    superValue.textContent = value;
+  });
+</script>
+</body>
+</html>

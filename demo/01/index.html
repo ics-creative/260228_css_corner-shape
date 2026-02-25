@@ -77,6 +77,10 @@
     .square .item {
       corner-shape: square;
     }
+
+    .squircle .item {
+      corner-shape: squircle;
+    }
   </style>
 </head>
 
@@ -85,7 +89,7 @@
   <!-- radiusスライダー -->
   <div class="radius-control">
     <label for="radius">border-radius:</label>
-    <input id="radius" max="60" min="0" type="range" value="20" />
+    <input id="radius" max="50" min="0" type="range" value="20" />
     <span id="radiusValue">20px</span>
   </div>
 
@@ -109,6 +113,10 @@
     <div class="square">
       <div class="item">square</div>
       <div class="item second-item">square</div>
+    </div>
+    <div class="squircle">
+      <div class="item">squircle</div>
+      <div class="item second-item">squircle</div>
     </div>
   </div>
 </div>
