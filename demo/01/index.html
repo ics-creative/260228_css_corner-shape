@@ -8,41 +8,12 @@
   <style>
     :root {
       --radius: 20px;
-      --shape: round;
     }
 
     .wrapper {
       display: grid;
       gap: 60px;
       color: #f8f8f8;
-    }
-
-    .controls {
-      display: grid;
-      gap: 40px;
-      font-size: 20px;
-    }
-
-    .shape-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .shape-buttons button {
-      padding: 6px 12px;
-      font-size: 14px;
-      color: #f8f8f8;
-      border-radius: 4px;
-      background: #7c71f6;
-      box-shadow: 3px 3px 0 #3223b3;
-
-      &:active {
-        transform: translateY(1px);
-        box-shadow: 1px 1px 0 #3223b3;
-      }
     }
 
     .radius-control {
@@ -61,79 +32,91 @@
       display: grid;
       justify-content: center;
       align-items: center;
-      grid-template-columns: 100px 1fr;
-      gap: 20px;
+      gap: 40px;
+
+      & > div {
+        display: grid;
+        grid-template-columns: 100px 250px;
+        gap: 20px;
+      }
     }
 
-    .button {
+    .item {
+      display: grid;
+      place-items: center;
       height: 100px;
-      font-size: 16px;
       color: #3223b3;
-      border: 1px solid #cccccc;
+      border: 1px solid #ebe9fc;
       border-radius: var(--radius);
       background: #ebe9fc;
       box-shadow: none;
-      transition: transform 0.1s ease;
 
-      &.second-button {
+      &.second-item {
         color: #f8f8f8;
         background: #3223b3;
         box-shadow: 6px 6px 0 #ebe9fc;
       }
-
-      &:active {
-        transform: translateY(1px);
-        box-shadow: 5px 5px 0 #ebe9fc;
-      }
     }
 
-    @supports (corner-shape: bevel) {
-      .button {
-        corner-shape: var(--shape);
-      }
+    .round .item {
+      corner-shape: round;
+    }
+
+    .bevel .item {
+      corner-shape: bevel;
+    }
+
+    .scoop .item {
+      corner-shape: scoop;
+    }
+
+    .notch .item {
+      corner-shape: notch;
+    }
+
+    .square .item {
+      corner-shape: square;
     }
   </style>
 </head>
 
 <body>
 <div class="wrapper">
-  <div class="controls">
-    <!-- shape切り替え -->
-    <div class="shape-buttons">
-      <p>shape:</p>
-      <button data-shape="round">round</button>
-      <button data-shape="bevel">bevel</button>
-      <button data-shape="scoop">scoop</button>
-      <button data-shape="notch">notch</button>
-      <button data-shape="square">square</button>
-    </div>
-
-    <!-- radiusスライダー -->
-    <div class="radius-control">
-      <label for="radius">border-radius:</label>
-      <input id="radius" max="60" min="0" type="range" value="20" />
-      <span id="radiusValue">20px</span>
-    </div>
+  <!-- radiusスライダー -->
+  <div class="radius-control">
+    <label for="radius">border-radius:</label>
+    <input id="radius" max="60" min="0" type="range" value="20" />
+    <span id="radiusValue">20px</span>
   </div>
 
   <div class="gallery">
-    <button class="button">Button</button>
-    <button class="button second-button">Button</button>
+    <div class="round">
+      <div class="item">round</div>
+      <div class="item second-item">round</div>
+    </div>
+    <div class="bevel">
+      <div class="item">bevel</div>
+      <div class="item second-item">bevel</div>
+    </div>
+    <div class="scoop">
+      <div class="item">scoop</div>
+      <div class="item second-item">scoop</div>
+    </div>
+    <div class="notch">
+      <div class="item">notch</div>
+      <div class="item second-item">notch</div>
+    </div>
+    <div class="square">
+      <div class="item">square</div>
+      <div class="item second-item">square</div>
+    </div>
   </div>
 </div>
 
 <script>
   const root = document.documentElement;
-  const shapeButtons = document.querySelectorAll("[data-shape]");
   const radiusSlider = document.getElementById("radius");
   const radiusValue = document.getElementById("radiusValue");
-
-  // shape切り替え
-  shapeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      root.style.setProperty("--shape", button.dataset.shape);
-    });
-  });
 
   // radius変更
   radiusSlider.addEventListener("input", () => {
